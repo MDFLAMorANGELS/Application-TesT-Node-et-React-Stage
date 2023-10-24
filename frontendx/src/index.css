@@ -3,6 +3,9 @@ body {
 }
 
 main {
-  height: 100vh;
-  animation: colorChange 3s infinite alternate; /* Animation de 3 secondes en boucle */
+  min-height: 80vh;
+}
+
+form {
+  width: 60vh;
 }

@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
 import { useAtom } from 'jotai';
 import { userAtom } from '../atom';
 import Logout from './Logout'
@@ -9,10 +8,10 @@ function Navbar() {
     const [user] = useAtom(userAtom);
 
     return (
-        <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <nav className="navbar navbar-expand-lg bg-success" data-bs-theme="dark">
             <div className="container-fluid">
                 <a className="navbar-brand" href="#">
-                    Twitter
+                    APPLICATION TEST
                 </a>
                 <button
                     className="navbar-toggler"
@@ -31,7 +30,7 @@ function Navbar() {
                             <>
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/home">
-                                        Home
+                                        Accueil
                                     </Link>
                                 </li>
                                 <Logout />
@@ -40,12 +39,12 @@ function Navbar() {
                             <>
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/signin">
-                                        Sign in
+                                        Connexion
                                     </Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/signup">
-                                        Sign up
+                                        Inscription
                                     </Link>
                                 </li>
                             </>
