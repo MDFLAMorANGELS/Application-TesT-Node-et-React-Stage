@@ -1,0 +1,8 @@
+body {
+  background-color: #babababd;
+}
+
+main {
+  height: 100vh;
+  animation: colorChange 3s infinite alternate; /* Animation de 3 secondes en boucle */
+}
