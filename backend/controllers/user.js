@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
-exports.signup =  (req, res , next) => {
+exports.signup = async (req, res, next) => {
+    try {
         bcrypt.hash(req.body.password, 10)
         .then(hash => {
             const user = new User (
@@ -11,37 +12,41 @@ exports.signup =  (req, res , next) => {
                 hash
             );
             user.save()
-            .then(() => {
-                return res.status(201).json({message: 'User created '})
-                ;})
+            .then(() => res.status(201).json({message: 'User created '}))
+            .catch(() => res.status(402).json({message:"nullllllll"}) )
         })
+    } catch (error) {
+        console.log(error);
+        return res.status(402).json({message: 'User not created '})
+    }
 };
 
-exports.login = (req, res, next) => {
-    User.findByEmail(req.body.email)
-        .then(([rows, fields]) => {
-            const user = rows[0];
-            if (!user) {
-                return res.status(401).json({ error: 'Utilisateur non trouvé' });
-            }
-            bcrypt.compare(req.body.password, user.password)
-                .then(valid => {
-                    if (!valid) {
-                        return res.status(401).json({ error: 'Mot de passe incorrect' });
-                    }
-                    res.status(200).json({
-                        userID: user.id, // Assurez-vous que la colonne ID correspond à votre structure de base de données
-                        token: jwt.sign(
-                            { userID: user.id },
-                            'RANDOM_TOKEN_SECRET',
-                            { expiresIn: '24h' }
-                        )
-                    });
-                })
-                .catch(error => res.status(500).json({ error }));
-        })
-        .catch(error => res.status(500).json({ error }));
+exports.login = async (req, res, next) => {
+    try {
+        const [rows, fields] = await User.findByEmail(req.body.email);
+        const user = rows[0];
+        if (!user) {
+            return res.status(401).json({ error: 'Utilisateur non trouvé' });
+        }
+        const validPassword = await bcrypt.compare(req.body.password, user.password);
+        if (!validPassword) {
+            return res.status(401).json({ error: 'Mot de passe incorrect' });
+        }
+        res.status(200).json({
+            email: user.email, // Ajout de l'e-mail
+            userID: user.id,
+            token: jwt.sign(
+                { userID: user.id },
+                'RANDOM_TOKEN_SECRET',
+                { expiresIn: '24h' }
+            )
+        });
+    } catch (error) {
+        console.error('Erreur lors de la connexion :', error);
+        return res.status(500).json({ error: 'Erreur lors de la connexion' });
+    }
 };
+
 
 
 exports.getUserInfo = async (req, res, next) => {

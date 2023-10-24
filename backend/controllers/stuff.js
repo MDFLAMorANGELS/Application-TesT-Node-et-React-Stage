@@ -32,7 +32,7 @@ exports.deleteThing = (req, res, next) => {
 
 exports.getOneThing = (req, res, next) => {
     Thing.findOne({ _id: req.params.id })
-        .then(thing => res.status(200).json(thing))
+        .then(thing => res.status(200).json(thing[0]))
         .catch(error => res.status(404).json({ error }));
 }
 
