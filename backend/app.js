@@ -1,19 +1,9 @@
 const express = require('express');
-const mongoose = require('mongoose');
 
 const stuffRoutes = require('./routes/stuff');
 const userRoutes = require('./routes/user');
 
 const app = express();
-
-// Connexion à la base de données MongoDB
-mongoose.connect('mongodb+srv://Angels:valentin78280@cluster0.ajbf5ye.mongodb.net/?retryWrites=true&w=majority',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 app.use(express.json());
 

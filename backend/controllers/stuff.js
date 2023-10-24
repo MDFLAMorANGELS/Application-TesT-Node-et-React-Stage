@@ -1,10 +1,20 @@
 const Thing = require('../models/Thing');
 
+
+
+exports.getAllStuff = (req, res, next) => {
+    Thing.find()
+        .then(things => {
+            console.log(things); // Afficher les objets things dans la console
+            res.status(200).json(things[0]);
+        })
+        .catch(error => res.status(400).json({ error }));
+}
+
 exports.createThing = (req, res, next) => {
     delete req.body._id;
-    const thing = new Thing({
-        ...req.body
-    });
+    const { title, description, imageUrl, price } = req.body;
+    const thing = new Thing(title, description, imageUrl, price);
     thing.save()
         .then(() => res.status(201).json({ message: 'Objet enregistrer' }))
         .catch(error => res.status(400).json({ error }));
@@ -28,8 +38,3 @@ exports.getOneThing = (req, res, next) => {
         .catch(error => res.status(404).json({ error }));
 }
 
-exports.getAllStuff = (req, res, next) => {
-    Thing.find()
-        .then(things => res.status(200).json(things))
-        .catch(error => res.status(400).json({ error }));
-}
