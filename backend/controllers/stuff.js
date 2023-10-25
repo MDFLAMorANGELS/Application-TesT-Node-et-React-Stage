@@ -2,20 +2,29 @@ const Thing = require('../models/Thing');
 
 
 
-exports.getAllStuff = (req, res, next) => {
-    Thing.find()
-        .then(things => res.status(200).json(things[0]))
-        .catch(error => res.status(400).json({ error }));
+exports.getAllStuff = async (req, res, next) => {
+    try {
+        Thing.find()
+            .then(things => res.status(200).json(things[0]))
+            .catch(error => res.status(400).json({ error }));
+    } catch (error) {
+        console.log(error);
+        return res.status(404).json({ message: 'Objet non Trouver' })
+    }
 }
 
-exports.createThing = (req, res, next) => {
-    delete req.body._id;
-    console.log();
-    const { title, description, imageUrl, price } = req.body;
-    const thing = new Thing(title, description, imageUrl, price);
-    thing.save()
-        .then(() => res.status(201).json({ message: 'Objet enregistrer' }))
-        .catch(error => res.status(400).json({ error }));
+exports.createThing = async (req, res, next) => {
+    try {
+        const userId = req.userID;
+        const { title, description, imageUrl, price } = req.body;
+        const thing = new Thing(title, description, imageUrl, price, userId);
+        thing.save()
+            .then(() => res.status(201).json({ message: 'Objet enregistrer' }))
+            .catch(error => res.status(400).json({ error }));
+    } catch (error) {
+        console.log(error);
+        return res.status(404).json({ message: 'Objet non enregistrer' })
+    }
 }
 
 exports.modifyThing = (req, res, next) => {

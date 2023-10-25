@@ -33,7 +33,7 @@ exports.login = async (req, res, next) => {
             return res.status(401).json({ error: 'Mot de passe incorrect' });
         }
         res.status(200).json({
-            email: user.email, // Ajout de l'e-mail
+            email: user.email,
             userID: user.id,
             token: jwt.sign(
                 { userID: user.id },

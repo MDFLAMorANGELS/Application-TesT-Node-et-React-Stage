@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import NotFoundPage from './pages/NotFoundPage';
+import CreateStuff from './pages/CreateStuff';
 
 
 function App() {
@@ -44,12 +45,14 @@ function App() {
               <Route exact path="/home" element={<Home />} />
               <Route path="/signup" element={<Navigate to="/home" />} />
               <Route path="/signin" element={<Navigate to="/home" />} />
+              <Route path="/create" element={<CreateStuff />} />
             </>
           ) : (
             <>
               <Route exact path="/home" element={<Navigate to="/signin" />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/signin" element={<Signin />} />
+              <Route path="/create" element={<Navigate to="/signin" />} />
             </>
           )}
         </Routes>

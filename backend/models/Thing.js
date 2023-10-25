@@ -1,12 +1,13 @@
 const db = require('../config/db');
 
 class Thing {
-  constructor( title, description, imageUrl, price) {
+  constructor( title, description, imageUrl, price, userId) {
    
     this.title = title;
     this.description = description;
     this.imageUrl = imageUrl;
     this.price = price;
+    this.userId = userId;
   }
     save() {
       
@@ -15,13 +16,15 @@ class Thing {
           title,
           description,
           imageUrl,
-          price
+          price,
+          userId
         )
         VALUES(
             '${this.title}',
             '${this.description}',
             '${this.imageUrl}',
-            '${this.price}'
+            '${this.price}',
+            '${this.userId}'
         )
         `;
         return db.execute(sql);
@@ -29,7 +32,7 @@ class Thing {
 
     static find() {
       let sql= `
-          SELECT * FROM thing;
+      SELECT thing.id, thing.created_at, thing.title,thing.description, thing.imageUrl, thing.price, thing.userId, user.email from thing INNER JOIN user ON thing.userId = user.ID;
       `;
 
       return db.execute(sql)

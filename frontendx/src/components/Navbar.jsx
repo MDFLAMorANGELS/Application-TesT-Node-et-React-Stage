@@ -28,21 +28,26 @@ function Navbar() {
                     <ul className="navbar-nav me-auto">
                         {user.isLogged ? (
                             <>
-                                <li className="nav-item">
+                                <li className="nav-item px-2">
                                     <Link className="nav-link" to="/home">
                                         Accueil
                                     </Link>
                                 </li>
-                                <Logout />
+                                <li className="nav-item px-2">
+                                    <Link className="nav-link" to="/create">
+                                        Vendre un objet
+                                    </Link>
+                                </li>
+                                <Logout/>
                             </>
                         ) : (
                             <>
-                                <li className="nav-item">
+                                <li className="nav-item px-2">
                                     <Link className="nav-link" to="/signin">
                                         Connexion
                                     </Link>
                                 </li>
-                                <li className="nav-item">
+                                <li className="nav-item px-2">
                                     <Link className="nav-link" to="/signup">
                                         Inscription
                                     </Link>
