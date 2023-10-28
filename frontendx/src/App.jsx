@@ -40,6 +40,7 @@ function App() {
       <main>
         <Routes>
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/" element={<Navigate to="/signin" />} />
           {user.isLogged ? (
             <>
               <Route exact path="/home" element={<Home />} />
