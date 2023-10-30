@@ -59,7 +59,7 @@ function Signup() {
                     Cookies.set('id', loginData.userID);
                     Cookies.set('email', loginData.email);
                     setUserState({ isLogged: true });
-                    navigate('/home')
+                    navigate('/')
                     resetForm()
                     console.log('Connexion réussie après inscription :', loginData);
                 } else {

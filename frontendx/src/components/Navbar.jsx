@@ -29,7 +29,7 @@ function Navbar() {
                         {user.isLogged ? (
                             <>
                                 <li className="nav-item px-2">
-                                    <Link className="nav-link" to="/home">
+                                    <Link className="nav-link" to="/">
                                         Accueil
                                     </Link>
                                 </li>
@@ -43,7 +43,7 @@ function Navbar() {
                         ) : (
                             <>
                                 <li className="nav-item px-2">
-                                    <Link className="nav-link" to="/signin">
+                                    <Link className="nav-link" to="/">
                                         Connexion
                                     </Link>
                                 </li>

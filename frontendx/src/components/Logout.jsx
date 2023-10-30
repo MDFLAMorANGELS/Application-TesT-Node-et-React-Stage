@@ -18,7 +18,7 @@ export default function Logout(props) {
     return (
         <a
             onClick={handleLogout}
-            href="/signin"
+            href="/"
             className="btn bg-danger px-2"
         >
             Déconnexion

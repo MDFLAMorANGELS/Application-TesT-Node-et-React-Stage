@@ -29,13 +29,6 @@ class User {
 
         return db.execute(sql);
     }
-
-    static findById(id) {
-        let sql = `SELECT * FROM user WHERE ID = '${id}';
-        `;
-        //console.log(sql);
-        return db.execute(sql);
-    }
 }
 
 module.exports = User;

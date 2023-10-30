@@ -46,16 +46,3 @@ exports.login = async (req, res, next) => {
         return res.status(500).json({ error: 'Erreur lors de la connexion' });
     }
 };
-
-
-
-exports.getUserInfo = async (req, res, next) => {
-    try {
-        let  info = await User.findById( req.userID );
-        res.status(200).json({user : info});
-    } catch (error) {
-        console.log(error);
-        next(error);
-        
-    }
-}

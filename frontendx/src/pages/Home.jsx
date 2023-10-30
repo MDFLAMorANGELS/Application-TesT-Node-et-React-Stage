@@ -35,7 +35,7 @@ function Home() {
         setItems(data);
       })
       .catch((error) => {
-        console.error("Erreur lors de la récupération des propriétés :", error);
+        console.error("Erreur lors de la récupération des items:", error);
       });
   }, []);
 
@@ -43,10 +43,10 @@ function Home() {
     <>
   <h2 className='text-center'>PAGE D'ACCUEIL</h2>
   {email && <h3 className='text-center'>Bonjours  {email}</h3>}
-  <div className="card_container d-flex justify-content-around align-items-center flex-wrap py-5">
+  <div className="d-flex justify-content-around align-items-center flex-wrap py-5">
     {Array.isArray(items) && items.length > 0 ? (
       items.map((item) => (
-        <Card key={item.id} item={item} />
+        <Card key={item.id} item={item} items={items}/>
       ))
     ) : (
       <p>Aucun élément à afficher.</p>

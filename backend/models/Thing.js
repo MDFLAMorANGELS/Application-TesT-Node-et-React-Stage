@@ -39,10 +39,19 @@ class Thing {
     }
 
     static findOne(id) {
-      let sql = `SELECT * FROM thing WHERE ID = '${id}';
-      `;
+      let sql = `
+      SELECT thing.id, thing.created_at, thing.title, thing.description, thing.imageUrl, thing.price, thing.userId, user.email 
+      FROM thing 
+      INNER JOIN user ON thing.userId = user.ID 
+      WHERE thing.id = '${id}'
+    `;
       return db.execute(sql);
   }
+
+    static deleteOne(id) {
+      let sql = `DELETE FROM thing WHERE id = ${id}`;
+      return db.execute(sql);
+    }
 }
 
 module.exports = Thing;

@@ -9,6 +9,7 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import NotFoundPage from './pages/NotFoundPage';
 import CreateStuff from './pages/CreateStuff';
+import Thing from './pages/Thing';
 
 
 function App() {
@@ -28,9 +29,7 @@ function App() {
       });
       Cookies.remove('token');
       Cookies.remove('id');
-      Cookies.remove('username');
       Cookies.remove('email');
-      Cookies.remove('admin');
     }
   }, []);
 
@@ -39,23 +38,20 @@ function App() {
       <Navbar />
       <main>
         <Routes>
-          <Route path="*" element={<NotFoundPage />} />
-          <Route path="/" element={<Navigate to="/signin" />} />
           {user.isLogged ? (
             <>
-              <Route exact path="/home" element={<Home />} />
-              <Route path="/signup" element={<Navigate to="/home" />} />
-              <Route path="/signin" element={<Navigate to="/home" />} />
+              <Route path="/" element={<Home />} />
+              <Route path="stuff/:id" element={<Thing />} />
+              <Route path="/signup" element={<Navigate to="/" />} />
               <Route path="/create" element={<CreateStuff />} />
             </>
           ) : (
             <>
-              <Route exact path="/home" element={<Navigate to="/signin" />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/signin" element={<Signin />} />
-              <Route path="/create" element={<Navigate to="/signin" />} />
+              <Route path="/" element={<Signin />} />
             </>
           )}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
     </BrowserRouter>

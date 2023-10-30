@@ -46,7 +46,7 @@ function Signin() {
         Cookies.set('id', loginData.userID);
         Cookies.set('email', loginData.email);
         setUserState({ isLogged: true });
-        navigate('/home')
+        navigate('/')
         resetForm()
         console.log('Connexion réussie :', loginData);
       } else {
