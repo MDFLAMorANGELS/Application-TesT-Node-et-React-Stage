@@ -52,6 +52,18 @@ class Thing {
       let sql = `DELETE FROM thing WHERE id = ${id}`;
       return db.execute(sql);
     }
+
+    static updateOne(id, newTitle, newDescription, newImageUrl, newPrice) {
+      let sql = `
+        UPDATE thing
+        SET thing.title = '${newTitle}',
+            thing.description = '${newDescription}',
+            thing.imageUrl = '${newImageUrl}',
+            thing.price = '${newPrice}'
+        WHERE thing.id = '${id}';
+      `;
+      return db.execute(sql);
+  }
 }
 
 module.exports = Thing;

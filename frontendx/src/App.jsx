@@ -41,7 +41,7 @@ function App() {
           {user.isLogged ? (
             <>
               <Route path="/" element={<Home />} />
-              <Route path="stuff/:id" element={<Thing />} />
+              <Route path="/stuff/:id" element={<Thing />} />
               <Route path="/signup" element={<Navigate to="/" />} />
               <Route path="/create" element={<CreateStuff />} />
             </>
