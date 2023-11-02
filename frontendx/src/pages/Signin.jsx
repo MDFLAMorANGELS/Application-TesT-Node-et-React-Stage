@@ -39,6 +39,7 @@ function Signin() {
         },
         body: JSON.stringify(userData),
       });
+      console.log(loginResponse);
 
       if (loginResponse.ok) {
         const loginData = await loginResponse.json();

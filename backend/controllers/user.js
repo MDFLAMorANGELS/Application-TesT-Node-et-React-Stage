@@ -23,12 +23,13 @@ exports.signup = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
     try {
-        const [rows, fields] = await User.findByEmail(req.body.email);
+        const { email, password } = req.body;
+        const [rows,] = await User.findByEmail(email);
         const user = rows[0];
         if (!user) {
             return res.status(401).json({ error: 'Utilisateur non trouvé' });
         }
-        const validPassword = await bcrypt.compare(req.body.password, user.password);
+        const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) {
             return res.status(401).json({ error: 'Mot de passe incorrect' });
         }

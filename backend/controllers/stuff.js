@@ -3,7 +3,7 @@ const Thing = require('../models/Thing');
 exports.getAllStuff = async (req, res, next) => {
     try {
         Thing.find()
-            .then(things => res.status(200).json(things[0]))
+            .then(things => res.status(200).json(things))
             .catch(error => res.status(400).json({ error }));
     } catch (error) {
         console.log(error);

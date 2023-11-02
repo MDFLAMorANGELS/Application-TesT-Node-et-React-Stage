@@ -1,33 +1,38 @@
 const db = require('../config/db');
 
 class User {
-    constructor( email, password) {
+    constructor(email, password) {
         this.email = email;
         this.password = password;
     }
 
-    save() {
-
-        let sql = `
-        INSERT INTO user(
-           email,
-           password
-        )
-        VALUES(
-            '${this.email}',
-            '${this.password}'
-        )
+    async save() {
+        const sql = `
+            INSERT INTO user (email, password)
+            VALUES (?, ?)
         `;
 
-        return db.execute(sql);
+        const values = [this.email, this.password];
+
+        try {
+            const [result] = await db.execute(sql, values);
+            return result;
+        } catch (error) {
+            throw error;
+        }
     }
 
-    static findByEmail(email) {
-        let sql= `
-            SELECT * FROM user WHERE email = '${email}';
+    static async findByEmail(email) {
+        const sql = `
+            SELECT * FROM user WHERE email = ?
         `;
-
-        return db.execute(sql);
+    
+        try {
+            const result = await db.execute(sql, [email]);
+            return result;
+        } catch (error) {
+            throw error;
+        }
     }
 }
 
